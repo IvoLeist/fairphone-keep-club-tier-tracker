@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Keep Club Tier Tracker</title>
+    <title>Keep Club Tier Tracker & Calculator</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="src/styles.css">
   </head>
@@ -11,7 +11,6 @@
     <main class="app-shell">
       <header class="headerbar">
         <div class="header-brand">
-          <p class="eyebrow">Fairphone Keep Club</p>
           <nav class="header-nav" aria-label="Primary">
             <a href="#intro">Intro</a>
             <a href="#tracking">Tracking table</a>
@@ -34,11 +33,9 @@
       </header>
       <section id="intro" class="intro">
         <div>
-          <h1>Keep Club Tier Tracker</h1>
+          <h1>Keep Club Tier Tracker & Calculator</h1>
           <p class="lede">
-            Upload a Keep Club export with Date, Challenge, Points, and Approved columns.
-            The table calculates rolling 12-month tier points, 3-year point expiry, and the
-            exact date each entry leaves the tier window.
+            Track your Fairphone Keep Club points and calculate when you'll reach the next tier. 
           </p>
         </div>
       </section>
@@ -46,9 +43,9 @@
       <section class="upload-panel">
         <label for="fileInput" class="upload-target">
           <span class="upload-text">
-            <span class="upload-title">Upload CSV or TSV</span>
-            <span class="upload-copy">Drop in your Keep Club export or choose a file.</span>
-            <span id="privacyNote" class="status-text"><svg class="info-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="none" fill="currentColor" opacity="0.08"></circle><path d="M8 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5zM7.25 6.5h1.5v5.25h-1.5V6.5z" fill="currentColor"/></svg>No data leaves your browser — all processing happens locally (in your browser).</span>
+            <span class="upload-title">Drop in your Keep Club CSV/TSV</span>
+            <span class="upload-copy">Expected columns: Date, Challenge, Points, Approved</span>
+            <span id="privacyNote" class="status-text"><svg class="info-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="none" fill="currentColor" opacity="0.08"></circle><path d="M8 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5zM7.25 6.5h1.5v5.25h-1.5V6.5z" fill="currentColor"/></svg>No data leaves your browser. All processing happens locally.</span>
           </span>
           <span class="upload-file">
             <span class="upload-cta">Choose file</span>
@@ -91,6 +88,7 @@
           <div>
             <h2>Tracking table</h2>
             <p id="tableCaption">Load an export to calculate each point entry.</p>
+            <p id="expiry-info">Points remain valid for 3 years. Only the points earned in the past 12 months count towards your current tier status</p>
           </div>
           <label class="filter-toggle">
             <input id="approvedOnly" type="checkbox" checked>
