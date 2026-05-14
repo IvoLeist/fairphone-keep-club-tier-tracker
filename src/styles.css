@@ -589,14 +589,14 @@ tbody tr:last-child td {
 
 .calculator {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr);
+  gap: 18px;
   align-items: start;
   margin-top: 28px;
-  padding: 22px;
+  padding: 0;
   background: var(--hero-bg);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
   box-shadow: var(--shadow);
 }
 
@@ -606,9 +606,9 @@ tbody tr:last-child td {
 }
 
 .tier-thresholds {
-  margin-top: 10px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
+  padding: 0 6px;
 }
 
 .tier-thresholds ul {
@@ -616,8 +616,7 @@ tbody tr:last-child td {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
 }
 
 .tier-threshold-label {
@@ -627,59 +626,66 @@ tbody tr:last-child td {
 
 .tier-chip {
   border-radius: 999px;
-  padding: 10px 12px;
+  min-height: 76px;
+  padding: 12px 18px;
   font-weight: 800;
   text-align: center;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+  display: grid;
+  align-content: center;
 }
 
 .tier-chip.copper {
-  background: color-mix(in srgb, var(--tier-copper), var(--panel) 86%);
+  background: color-mix(in srgb, var(--tier-copper), var(--panel) 90%);
   color: var(--tier-copper);
-  border-color: color-mix(in srgb, var(--tier-copper), transparent 68%);
+  border-color: color-mix(in srgb, var(--tier-copper), transparent 72%);
 }
 
 .tier-chip.silver {
-  background: color-mix(in srgb, var(--tier-silver), var(--panel) 86%);
+  background: color-mix(in srgb, var(--tier-silver), var(--panel) 88%);
   color: var(--tier-silver);
-  border-color: color-mix(in srgb, var(--tier-silver), transparent 68%);
+  border-color: color-mix(in srgb, var(--tier-silver), transparent 72%);
 }
 
 .tier-chip.gold {
-  background: color-mix(in srgb, var(--tier-gold), var(--panel) 86%);
+  background: color-mix(in srgb, var(--tier-gold), var(--panel) 90%);
   color: var(--tier-gold);
-  border-color: color-mix(in srgb, var(--tier-gold), transparent 68%);
+  border-color: color-mix(in srgb, var(--tier-gold), transparent 72%);
 }
 
 .tier-chip .tier-label {
   display: block;
+  font-size: 1.12rem;
+  line-height: 1.15;
 }
 
 .tier-chip .tier-rate {
   display: block;
   margin-top: 6px;
-  font-weight: 700;
-  font-size: 0.86rem;
+  font-weight: 800;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
 .tier-chip.is-active {
-  box-shadow: inset 0 0 0 2px currentColor;
-  transform: translateY(-1px);
+  box-shadow: none;
+  transform: none;
 }
 
 .calculator-card {
-  padding: 20px;
+  padding: 22px 24px 24px;
   width: 100%;
   background: var(--panel-raised);
-  box-shadow: 0 10px 28px rgb(25 33 29 / 6%);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .calculator-card label {
   display: block;
   font-weight: 800;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
 }
 
 .footerbar {
@@ -712,28 +718,41 @@ tbody tr:last-child td {
 .input-row input {
   min-width: 0;
   flex: 1;
-  height: 42px;
+  height: 48px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 0 12px;
+  padding: 0 14px;
   background: var(--input-bg);
   color: var(--ink);
+  font-size: 1.1rem;
+}
+
+.input-row button {
+  min-height: 48px;
+  padding: 0 18px;
+  font-size: 1rem;
 }
 
 .calc-results {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin: 18px 0 0;
+  margin: 20px 0 0;
 }
 
 .calc-results div {
   display: grid;
-  gap: 8px;
-  padding: 14px;
+  gap: 10px;
+  min-height: 114px;
+  align-content: center;
+  padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
+}
+
+.calc-results .calc-result-meta {
+  display: none;
 }
 
 .calc-results .calc-result-primary {
@@ -743,13 +762,15 @@ tbody tr:last-child td {
 
 .calc-results dt {
   color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.25;
 }
 
 .calc-results dd {
   margin: 0;
   font-weight: 800;
   text-align: left;
-  font-size: 1.08rem;
+  font-size: 1.12rem;
 }
 
 @media (max-width: 900px) {
@@ -767,6 +788,15 @@ tbody tr:last-child td {
 
   .calc-results {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calculator {
+    grid-template-columns: 1fr;
+    padding-bottom: 14px;
+  }
+
+  .tier-thresholds {
+    padding: 0 14px;
   }
 }
 
@@ -834,7 +864,7 @@ tbody tr:last-child td {
   }
 
   .calculator {
-    padding: 14px;
+    padding: 0 0 12px;
   }
 
   .summary-grid {
