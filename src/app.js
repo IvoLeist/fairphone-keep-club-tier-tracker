@@ -8,11 +8,13 @@ const tiers = [
 ];
 
 let entries = [];
+const themeStorageKey = "keepclub-theme";
 
 const els = {
   fileInput: document.querySelector("#fileInput"),
   sampleButton: document.querySelector("#sampleButton"),
   clearButton: document.querySelector("#clearButton"),
+  themeToggle: document.querySelector("#themeToggle"),
   fileStatus: document.querySelector("#fileStatus"),
   approvedOnly: document.querySelector("#approvedOnly"),
   trackingBody: document.querySelector("#trackingBody"),
@@ -183,6 +185,19 @@ function formatMoney(value) {
   return new Intl.NumberFormat(undefined, { style: "currency", currency: "EUR" }).format(value);
 }
 
+function getPreferredTheme() {
+  const storedTheme = localStorage.getItem(themeStorageKey);
+  if (storedTheme === "light" || storedTheme === "dark") return storedTheme;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  els.themeToggle.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  els.themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+  localStorage.setItem(themeStorageKey, theme);
+}
+
 function render() {
   const analyzed = entries.map(analyzeEntry).sort((a, b) => b.date - a.date);
   const shown = els.approvedOnly.checked ? analyzed.filter((entry) => entry.approvedForCalculations) : analyzed;
@@ -319,5 +334,12 @@ els.useCalculatedButton.addEventListener("click", () => {
   els.manualPoints.value = String(points);
   renderCalculator();
 });
+
+els.themeToggle.addEventListener("click", () => {
+  const currentTheme = document.documentElement.dataset.theme || getPreferredTheme();
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+});
+
+applyTheme(getPreferredTheme());
 
 render();
