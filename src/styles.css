@@ -393,6 +393,33 @@ th {
   margin-bottom: 8px;
 }
 
+.footerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footerbar p {
+  margin: 0;
+}
+
+.footerbar a {
+  color: inherit;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footerbar a:hover {
+  text-decoration: underline;
+}
+
 .input-row input {
   min-width: 0;
   flex: 1;
@@ -479,5 +506,10 @@ th {
 
   .calc-results {
     grid-template-columns: 1fr;
+  }
+
+  .footerbar {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
