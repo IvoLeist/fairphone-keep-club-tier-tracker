@@ -121,25 +121,7 @@
       </section>
 
       <section id="calculator" class="calculator">
-        <div>
-          <h2>Tier calculator</h2>
-          <div class="tier-thresholds" aria-label="Tier thresholds">
-            <ul>
-              <li class="tier-chip copper" data-tier="copper">
-                <span class="tier-label">Copper: &ge; 0 points</span>
-                <small class="tier-rate">1€ = 1 point</small>
-              </li>
-              <li class="tier-chip silver" data-tier="silver">
-                <span class="tier-label">Silver: &ge; 150 points</span>
-                <small class="tier-rate">1€ = 1.25 points</small>
-              </li>
-              <li class="tier-chip gold" data-tier="gold">
-                <span class="tier-label">Gold: &ge; 500 points</span>
-                <small class="tier-rate">1€ = 1.5 points</small>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <h2 class="visually-hidden">Tier calculator</h2>
         <div class="calculator-card">
           <label for="manualPoints">Points (in 12-month window)</label>
           <div class="input-row">
@@ -147,11 +129,11 @@
             <button id="useCalculatedButton" type="button">Use calculated</button>
           </div>
           <dl class="calc-results">
-            <div>
+            <div class="calc-result-meta">
               <dt>Tier at this spending</dt>
               <dd id="calcTier">Copper</dd>
             </div>
-            <div>
+            <div class="calc-result-meta">
               <dt>Conversion rate</dt>
               <dd id="calcRate">1</dd>
             </div>
@@ -164,6 +146,22 @@
               <dd id="calcSpending">€150.00</dd>
             </div>
           </dl>
+        </div>
+        <div class="tier-thresholds" aria-label="Tier thresholds">
+          <ul>
+            <li class="tier-chip gold" data-tier="gold">
+              <span class="tier-label">Gold: &ge; 500 points</span>
+              <small class="tier-rate">1€ = 1.5 points</small>
+            </li>
+            <li class="tier-chip silver" data-tier="silver">
+              <span class="tier-label">Silver: &ge; 150 points</span>
+              <small class="tier-rate">1€ = 1.25 points</small>
+            </li>
+            <li class="tier-chip copper" data-tier="copper">
+              <span class="tier-label">Copper: &ge; 0 points</span>
+              <small class="tier-rate">1€ = 1 point</small>
+            </li>
+          </ul>
         </div>
       </section>
 
