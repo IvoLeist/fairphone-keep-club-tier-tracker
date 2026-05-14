@@ -383,6 +383,16 @@ h2 {
   font-size: 0.92rem;
 }
 
+.info-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 8px;
+  fill: currentColor;
+  color: var(--accent-2);
+}
+
 .upload-panel[data-state="loaded"] .status-text {
   color: var(--accent);
   font-weight: 700;
