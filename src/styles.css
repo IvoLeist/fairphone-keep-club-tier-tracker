@@ -92,16 +92,87 @@ button:hover {
   margin-bottom: 12px;
 }
 
+.header-brand {
+  display: grid;
+  gap: 8px;
+}
+
 .headerbar .eyebrow {
   margin-bottom: 0;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.header-nav a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--ink);
+  font-size: 0.83rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: var(--panel);
+}
+
+.header-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.headerbar .theme-toggle {
+  min-height: 34px;
+  padding: 6px 12px;
+  margin-left: auto;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.repo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 0.83rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.repo-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.repo-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: 0;
   align-items: stretch;
-  padding: 28px 0;
+  padding: 28px 0 12px;
 }
 
 .eyebrow {
@@ -195,9 +266,17 @@ h2 {
 }
 
 .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   white-space: nowrap;
   justify-content: center;
   border: 1px solid var(--line);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .status-text {
@@ -480,6 +559,15 @@ th {
   .headerbar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .header-nav {
+    width: 100%;
+  }
+
+  .header-nav a {
+    flex: 1 1 auto;
+    text-align: center;
   }
 
   .intro {

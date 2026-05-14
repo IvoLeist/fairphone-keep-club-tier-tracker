@@ -9,33 +9,52 @@
   <body>
     <main class="app-shell">
       <header class="headerbar">
-        <p class="eyebrow">Fairphone Keep Club</p>
-        <button id="themeToggle" type="button" class="secondary theme-toggle" aria-pressed="false">Dark mode</button>
+        <div class="header-brand">
+          <p class="eyebrow">Fairphone Keep Club Tier Tracker & Calculator</p>
+          <nav class="header-nav" aria-label="Primary">
+            <a href="#intro">Intro</a>
+            <a href="#tracking">Tracking table</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#footer">Disclaimer</a>
+          </nav>
+        </div>
+        <div class="header-actions">
+          <a class="repo-link" href="https://github.com/IvoLeist/fairphone-keep-club-tier-tracker" target="_blank" rel="noreferrer noopener" aria-label="GitHub repository">
+            <svg class="repo-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.74-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <button id="themeToggle" type="button" class="secondary theme-toggle" aria-pressed="false">
+            <span class="theme-icon" aria-hidden="true">&#9789;</span>
+            <span class="theme-label">Dark mode</span>
+          </button>
+        </div>
       </header>
-      <section class="intro">
+      <section id="intro" class="intro">
         <div>
-          <h1>Tier Tracker & Calculator</h1>
           <p class="lede">
             Upload a Keep Club export with Date, Challenge, Points, and Approved columns.
             The table calculates rolling 12-month tier points, 3-year point expiry, and the
             exact date each entry leaves the tier window.
           </p>
         </div>
-        <div class="upload-panel">
-          <label for="fileInput" class="upload-target">
-            <span class="upload-title">Upload CSV or TSV</span>
-            <span class="upload-copy">Drop in your Keep Club export or choose a file</span>
-            <input id="fileInput" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
-          </label>
-          <div class="upload-actions">
-            <button id="sampleButton" type="button">Example</button>
-            <button id="clearButton" type="button" class="secondary">Clear</button>
-          </div>
-          <p id="fileStatus" class="status-text">No export loaded.</p>
-        </div>
       </section>
 
-      <section class="summary-grid" aria-label="Summary">
+      <section class="upload-panel">
+        <label for="fileInput" class="upload-target">
+          <span class="upload-title">Upload CSV or TSV</span>
+          <span class="upload-copy">Drop in your Keep Club export or choose a file</span>
+          <input id="fileInput" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
+        </label>
+        <div class="upload-actions">
+          <button id="sampleButton" type="button">Example</button>
+          <button id="clearButton" type="button" class="secondary">Clear</button>
+        </div>
+        <p id="fileStatus" class="status-text">No export loaded.</p>
+      </section>
+
+      <section id="summary" class="summary-grid" aria-label="Summary">
         <article class="metric">
           <span>Current tier</span>
           <strong id="summaryTier">Copper</strong>
@@ -54,7 +73,7 @@
         </article>
       </section>
 
-      <section class="workspace">
+      <section id="tracking" class="workspace">
         <div class="table-toolbar">
           <div>
             <h2>Tracking table</h2>
@@ -89,7 +108,7 @@
         </div>
       </section>
 
-      <section class="calculator">
+      <section id="calculator" class="calculator">
         <div>
           <h2>Tier calculator</h2>
           <p>
@@ -130,7 +149,7 @@
         </div>
       </section>
 
-      <footer class="footerbar" aria-label="Site footer">
+      <footer id="footer" class="footerbar" aria-label="Site footer">
         <p>Disclaimer: This project is not affiliated with, endorsed by, or sponsored by Fairphone.</p>
         <p><a href="LICENSE">MIT License</a></p>
         <p>© 2026 Ivo Leist</p>

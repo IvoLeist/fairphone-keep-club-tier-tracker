@@ -15,6 +15,8 @@ const els = {
   sampleButton: document.querySelector("#sampleButton"),
   clearButton: document.querySelector("#clearButton"),
   themeToggle: document.querySelector("#themeToggle"),
+  themeToggleIcon: document.querySelector("#themeToggle .theme-icon"),
+  themeToggleLabel: document.querySelector("#themeToggle .theme-label"),
   fileStatus: document.querySelector("#fileStatus"),
   approvedOnly: document.querySelector("#approvedOnly"),
   trackingBody: document.querySelector("#trackingBody"),
@@ -193,7 +195,14 @@ function getPreferredTheme() {
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  els.themeToggle.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  if (els.themeToggleIcon) {
+    els.themeToggleIcon.textContent = theme === "dark"
+      ? String.fromCodePoint(9728)
+      : String.fromCodePoint(9789);
+  }
+  if (els.themeToggleLabel) {
+    els.themeToggleLabel.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+  }
   els.themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
   localStorage.setItem(themeStorageKey, theme);
 }
