@@ -20,7 +20,7 @@ const els = {
   themeToggleIcon: document.querySelector("#themeToggle .theme-icon"),
   themeToggleLabel: document.querySelector("#themeToggle .theme-label"),
   fileStatus: document.querySelector("#fileStatus"),
-  approvedOnly: document.querySelector("#approvedOnly"),
+  countTowardsTierOnly: document.querySelector("#countTowardsTierOnly"),
   trackingBody: document.querySelector("#trackingBody"),
   tableCaption: document.querySelector("#tableCaption"),
   summaryTierCard: document.querySelector("#summaryTierCard"),
@@ -233,7 +233,7 @@ function applyTheme(theme) {
 
 function render() {
   const analyzed = entries.map(analyzeEntry).sort((a, b) => b.date - a.date);
-  const shown = els.approvedOnly.checked ? analyzed.filter((entry) => entry.approvedForCalculations) : analyzed;
+  const shown = els.countTowardsTierOnly.checked ? analyzed.filter((entry) => entry.countsTowardTier) : analyzed;
   const windowPoints = analyzed
     .filter((entry) => entry.countsTowardTier)
     .reduce((total, entry) => total + entry.points, 0);
@@ -371,7 +371,7 @@ els.clearButton.addEventListener("click", () => {
   render();
 });
 
-els.approvedOnly.addEventListener("change", render);
+els.countTowardsTierOnly.addEventListener("change", render);
 
 els.manualPoints.addEventListener("input", renderCalculator);
 

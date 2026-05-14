@@ -697,8 +697,17 @@ tbody tr:last-child td {
 }
 
 .tier-chip.is-active {
-  box-shadow: none;
-  transform: none;
+  border-color: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor, transparent 84%), var(--shadow);
+  transform: translateY(-1px);
+}
+
+.tier-chip.is-active .tier-label {
+  color: inherit;
+}
+
+.tier-chip.is-active .tier-rate {
+  color: inherit;
 }
 
 .calculator-card {
