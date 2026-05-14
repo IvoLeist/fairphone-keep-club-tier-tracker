@@ -590,7 +590,8 @@ tbody tr:last-child td {
 .calculator {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(300px, 1fr);
-  gap: 18px;
+  column-gap: 18px;
+  row-gap: 0;
   align-items: start;
   margin-top: 28px;
   padding: 0;
@@ -605,10 +606,27 @@ tbody tr:last-child td {
   margin-bottom: 0;
 }
 
+.calculator-header {
+  grid-column: 1 / -1;
+  padding: 22px 24px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.calculator-header h2 {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.calculator-header p {
+  color: var(--muted);
+}
+
 .tier-thresholds {
   display: grid;
   gap: 12px;
-  padding: 0 6px;
+  padding: 6px 6px 6px 0;
 }
 
 .tier-thresholds ul {
@@ -796,7 +814,7 @@ tbody tr:last-child td {
   }
 
   .tier-thresholds {
-    padding: 0 14px;
+    padding: 14px 14px 0;
   }
 }
 
