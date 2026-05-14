@@ -30,6 +30,7 @@ const els = {
   summaryWindowPoints: document.querySelector("#summaryWindowPoints"),
   summaryUnexpiredPoints: document.querySelector("#summaryUnexpiredPoints"),
   summaryNextDropout: document.querySelector("#summaryNextDropout"),
+  summaryNextExpiration: document.querySelector("#summaryNextExpiration"),
   manualPoints: document.querySelector("#manualPoints"),
   useCalculatedButton: document.querySelector("#useCalculatedButton"),
   calcTier: document.querySelector("#calcTier"),
@@ -243,6 +244,9 @@ function render() {
   const nextDropout = analyzed
     .filter((entry) => entry.countsTowardTier && entry.dropsOutInMonths !== null)
     .sort((a, b) => a.dropoutDate - b.dropoutDate)[0];
+  const nextExpiration = analyzed
+    .filter((entry) => entry.countsTowardTier && entry.expiresInMonths !== null)
+    .sort((a, b) => a.expiryDate - b.expiryDate)[0];
 
   const progress = getTierProgress(windowPoints);
 
@@ -253,6 +257,7 @@ function render() {
   els.summaryWindowPoints.textContent = String(windowPoints);
   els.summaryUnexpiredPoints.textContent = String(unexpiredPoints);
   els.summaryNextDropout.textContent = nextDropout ? formatDate(nextDropout.dropoutDate) : "-";
+  els.summaryNextExpiration.textContent = nextExpiration ? formatDate(nextExpiration.expiryDate) : "-";
   els.tableCaption.textContent = entries.length
     ? `${shown.length} shown, ${entries.length} loaded. Calculations use today's date.`
     : "Load an export to calculate each point entry.";
@@ -387,6 +392,38 @@ els.useCalculatedButton.addEventListener("click", () => {
 els.themeToggle.addEventListener("click", () => {
   const currentTheme = document.documentElement.dataset.theme || getPreferredTheme();
   applyTheme(currentTheme === "dark" ? "light" : "dark");
+});
+
+function clearRowHighlights() {
+  document.querySelectorAll("#trackingBody tr.marked").forEach((row) => {
+    row.classList.remove("marked");
+  });
+}
+
+function markRowsByDate(dateString) {
+  if (!dateString || dateString === "-") {
+    clearRowHighlights();
+    return;
+  }
+  clearRowHighlights();
+  const rows = document.querySelectorAll("#trackingBody tr");
+  rows.forEach((row) => {
+    const cells = row.querySelectorAll("td");
+    const entryDate = cells[0]?.textContent.trim();
+    const dropoutDate = cells[6]?.textContent.trim();
+    const expiryDate = cells[8]?.textContent.trim();
+    if (entryDate === dateString || dropoutDate === dateString || expiryDate === dateString) {
+      row.classList.add("marked");
+    }
+  });
+}
+
+document.querySelectorAll(".metric-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const dateElement = button.querySelector("strong");
+    const dateValue = dateElement ? dateElement.textContent.trim() : "";
+    markRowsByDate(dateValue);
+  });
 });
 
 applyTheme(getPreferredTheme());

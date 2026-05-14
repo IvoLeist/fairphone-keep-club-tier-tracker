@@ -405,7 +405,7 @@ h2 {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: 1.35fr repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1.35fr repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin: 0 0 18px;
 }
@@ -414,8 +414,28 @@ h2 {
   padding: 16px;
   min-height: 116px;
   display: grid;
-  align-content: start;
+  align-content: space-between;
   box-shadow: 0 10px 30px rgb(25 33 29 / 5%);
+}
+
+.metric-btn {
+  padding: 16px;
+  min-height: 116px;
+  display: grid;
+  align-content: space-between;
+  box-shadow: 0 10px 30px rgb(25 33 29 / 5%);
+  border: none;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.metric:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 14px 40px rgb(25 33 29 / 10%);
+}
+
+.metric:active {
+  transform: translateY(1px);
 }
 
 .metric span {
@@ -490,6 +510,14 @@ h2 {
 .workspace {
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+
+#trackingBody tr.marked {
+  background: color-mix(in srgb, var(--accent), var(--panel) 88%);
+}
+
+#trackingBody tr.marked td {
+  background: inherit;
 }
 
 .table-toolbar {
