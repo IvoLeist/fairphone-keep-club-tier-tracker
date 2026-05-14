@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Keep Club Tier Tracker</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="src/styles.css">
   </head>
   <body>
     <main class="app-shell">
       <header class="headerbar">
         <div class="header-brand">
-          <p class="eyebrow">Fairphone Keep Club Tier Tracker & Calculator</p>
+          <p class="eyebrow">Fairphone Keep Club</p>
           <nav class="header-nav" aria-label="Primary">
             <a href="#intro">Intro</a>
             <a href="#tracking">Tracking table</a>
@@ -33,6 +34,7 @@
       </header>
       <section id="intro" class="intro">
         <div>
+          <h1>Keep Club Tier Tracker</h1>
           <p class="lede">
             Upload a Keep Club export with Date, Challenge, Points, and Approved columns.
             The table calculates rolling 12-month tier points, 3-year point expiry, and the
@@ -43,9 +45,15 @@
 
       <section class="upload-panel">
         <label for="fileInput" class="upload-target">
-          <span class="upload-title">Upload CSV or TSV</span>
-          <span class="upload-copy">Drop in your Keep Club export or choose a file</span>
-          <input id="fileInput" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
+          <span class="upload-text">
+            <span class="upload-title">Upload CSV or TSV</span>
+            <span class="upload-copy">Drop in your Keep Club export or choose a file.</span>
+          </span>
+          <span class="upload-file">
+            <span class="upload-cta">Choose file</span>
+            <span id="fileName" class="upload-filename">No file selected</span>
+          </span>
+          <input id="fileInput" class="visually-hidden" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
         </label>
         <div class="upload-actions">
           <button id="sampleButton" type="button">Example</button>
@@ -55,9 +63,13 @@
       </section>
 
       <section id="summary" class="summary-grid" aria-label="Summary">
-        <article class="metric">
+        <article id="summaryTierCard" class="metric metric-tier">
           <span>Current tier</span>
           <strong id="summaryTier">Copper</strong>
+          <div class="tier-progress" aria-hidden="true">
+            <span id="summaryProgressFill"></span>
+          </div>
+          <small id="summaryProgressLabel">150 points to Silver</small>
         </article>
         <article class="metric">
           <span>Points counting towards the current tier</span>
@@ -116,9 +128,9 @@
           </p>
           <div class="tier-thresholds" aria-label="Tier thresholds">
             <ul>
-              <li class="tier-chip copper">Copper: &ge; 0 points</li>
-              <li class="tier-chip silver">Silver: &ge; 150 points</li>
-              <li class="tier-chip gold">Gold: &ge; 500 points</li>
+              <li class="tier-chip copper" data-tier="copper">Copper: &ge; 0 points</li>
+              <li class="tier-chip silver" data-tier="silver">Silver: &ge; 150 points</li>
+              <li class="tier-chip gold" data-tier="gold">Gold: &ge; 500 points</li>
             </ul>
           </div>
         </div>
@@ -141,7 +153,7 @@
               <dt>Missing points till next tier</dt>
               <dd id="calcMissing">150</dd>
             </div>
-            <div>
+            <div class="calc-result-primary">
               <dt>Required spending for next tier</dt>
               <dd id="calcSpending">€150.00</dd>
             </div>

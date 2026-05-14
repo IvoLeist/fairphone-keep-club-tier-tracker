@@ -11,7 +11,9 @@ let entries = [];
 const themeStorageKey = "keepclub-theme";
 
 const els = {
+  uploadPanel: document.querySelector(".upload-panel"),
   fileInput: document.querySelector("#fileInput"),
+  fileName: document.querySelector("#fileName"),
   sampleButton: document.querySelector("#sampleButton"),
   clearButton: document.querySelector("#clearButton"),
   themeToggle: document.querySelector("#themeToggle"),
@@ -21,7 +23,10 @@ const els = {
   approvedOnly: document.querySelector("#approvedOnly"),
   trackingBody: document.querySelector("#trackingBody"),
   tableCaption: document.querySelector("#tableCaption"),
+  summaryTierCard: document.querySelector("#summaryTierCard"),
   summaryTier: document.querySelector("#summaryTier"),
+  summaryProgressFill: document.querySelector("#summaryProgressFill"),
+  summaryProgressLabel: document.querySelector("#summaryProgressLabel"),
   summaryWindowPoints: document.querySelector("#summaryWindowPoints"),
   summaryUnexpiredPoints: document.querySelector("#summaryUnexpiredPoints"),
   summaryNextDropout: document.querySelector("#summaryNextDropout"),
@@ -31,6 +36,7 @@ const els = {
   calcMissing: document.querySelector("#calcMissing"),
   calcRate: document.querySelector("#calcRate"),
   calcSpending: document.querySelector("#calcSpending"),
+  tierChips: document.querySelectorAll(".tier-chip"),
 };
 
 let exampleRowsPromise = null;
@@ -169,6 +175,24 @@ function getNextTier(points) {
   return tiers.find((tier) => tier.min > points) || null;
 }
 
+function getTierProgress(points) {
+  const tier = getTier(points);
+  const next = getNextTier(points);
+  if (!next) {
+    return {
+      percent: 100,
+      label: "Top tier reached",
+      tier,
+    };
+  }
+
+  return {
+    percent: Math.min(100, Math.max(0, (points / next.min) * 100)),
+    label: `${next.min - points} points to ${next.name}`,
+    tier,
+  };
+}
+
 function formatDate(date) {
   return date ? new Intl.DateTimeFormat(undefined, {
     year: "numeric",
@@ -220,7 +244,12 @@ function render() {
     .filter((entry) => entry.countsTowardTier && entry.dropsOutInMonths !== null)
     .sort((a, b) => a.dropoutDate - b.dropoutDate)[0];
 
-  els.summaryTier.textContent = getTier(windowPoints).name;
+  const progress = getTierProgress(windowPoints);
+
+  els.summaryTier.textContent = progress.tier.name;
+  els.summaryTierCard.dataset.tier = progress.tier.name.toLowerCase();
+  els.summaryProgressFill.style.width = `${progress.percent}%`;
+  els.summaryProgressLabel.textContent = progress.label;
   els.summaryWindowPoints.textContent = String(windowPoints);
   els.summaryUnexpiredPoints.textContent = String(unexpiredPoints);
   els.summaryNextDropout.textContent = nextDropout ? formatDate(nextDropout.dropoutDate) : "-";
@@ -267,6 +296,9 @@ function renderCalculator() {
   els.calcMissing.textContent = next ? String(missing) : "Top tier reached";
   els.calcRate.textContent = tier.rate.toLocaleString(undefined, { maximumFractionDigits: 2 });
   els.calcSpending.textContent = next ? formatMoney(spending) : formatMoney(0);
+  els.tierChips.forEach((chip) => {
+    chip.classList.toggle("is-active", chip.dataset.tier === tier.name.toLowerCase());
+  });
 }
 
 function escapeHtml(value) {
@@ -282,6 +314,8 @@ function escapeHtml(value) {
 function loadRows(rows, label) {
   entries = rowsToEntries(rows);
   els.fileStatus.textContent = `${label}: ${entries.length} valid rows loaded.`;
+  els.fileName.textContent = label;
+  els.uploadPanel.dataset.state = "loaded";
   render();
 }
 
@@ -310,6 +344,8 @@ els.fileInput.addEventListener("change", async (event) => {
   } catch (error) {
     entries = [];
     els.fileStatus.textContent = error.message;
+    els.fileName.textContent = file.name;
+    els.uploadPanel.dataset.state = "error";
     render();
   }
 });
@@ -320,6 +356,8 @@ els.sampleButton.addEventListener("click", () => {
     .catch((error) => {
       entries = [];
       els.fileStatus.textContent = error.message;
+      els.fileName.textContent = "Example TSV";
+      els.uploadPanel.dataset.state = "error";
       render();
     });
 });
@@ -327,6 +365,8 @@ els.sampleButton.addEventListener("click", () => {
 els.clearButton.addEventListener("click", () => {
   entries = [];
   els.fileInput.value = "";
+  els.fileName.textContent = "No file selected";
+  els.uploadPanel.dataset.state = "empty";
   els.fileStatus.textContent = "No export loaded.";
   render();
 });
@@ -350,5 +390,7 @@ els.themeToggle.addEventListener("click", () => {
 });
 
 applyTheme(getPreferredTheme());
+
+els.uploadPanel.dataset.state = "empty";
 
 render();
