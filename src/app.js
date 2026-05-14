@@ -420,9 +420,22 @@ function markRowsByDate(dateString) {
 
 document.querySelectorAll(".metric-btn").forEach((button) => {
   button.addEventListener("click", () => {
+    const isActive = button.classList.toggle("active");
     const dateElement = button.querySelector("strong");
     const dateValue = dateElement ? dateElement.textContent.trim() : "";
-    markRowsByDate(dateValue);
+    
+    // Deactivate all other metric-btn buttons
+    document.querySelectorAll(".metric-btn.active").forEach((otherButton) => {
+      if (otherButton !== button) {
+        otherButton.classList.remove("active");
+      }
+    });
+    
+    if (isActive) {
+      markRowsByDate(dateValue);
+    } else {
+      clearRowHighlights();
+    }
   });
 });
 

@@ -438,6 +438,29 @@ h2 {
   transform: translateY(1px);
 }
 
+.metric-btn:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 14px 40px rgb(25 33 29 / 10%);
+}
+
+.metric-btn:active {
+  transform: translateY(1px);
+}
+
+.metric-btn.active {
+  background: color-mix(in srgb, var(--accent), var(--panel) 85%);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.metric-btn.active strong {
+  color: var(--accent);
+}
+
+.metric-btn.active span {
+  color: var(--accent);
+}
+
 .metric span {
   display: block;
   color: var(--muted);
