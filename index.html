@@ -11,7 +11,7 @@
       <section class="intro">
         <div>
           <p class="eyebrow">Fairphone Keep Club</p>
-          <h1>Tier and point expiry tracker</h1>
+          <h1>Tier Tracker & Calculator</h1>
           <p class="lede">
             Upload a Keep Club export with Date, Challenge, Points, and Approved columns.
             The table calculates rolling 12-month tier points, 3-year point expiry, and the
@@ -90,9 +90,15 @@
         <div>
           <h2>Tier calculator</h2>
           <p>
-            Enter the points currently inside your 12-month tier window. The calculator uses
-            the workbook thresholds: Copper from 0, Silver from 150, Gold from 500.
+            Enter the points currently inside your 12-month tier window.
           </p>
+          <div class="tier-thresholds" aria-label="Tier thresholds">
+            <ul>
+              <li class="tier-chip copper">Copper: &ge; 0 points</li>
+              <li class="tier-chip silver">Silver: &ge; 150 points</li>
+              <li class="tier-chip gold">Gold: &ge; 500 points</li>
+            </ul>
+          </div>
         </div>
         <div class="calculator-card">
           <label for="manualPoints">Current points in 12-month window</label>
@@ -106,12 +112,12 @@
               <dd id="calcTier">Copper</dd>
             </div>
             <div>
-              <dt>Missing points till next tier</dt>
-              <dd id="calcMissing">150</dd>
-            </div>
-            <div>
               <dt>Points per 1 €</dt>
               <dd id="calcRate">1</dd>
+            </div>
+            <div>
+              <dt>Missing points till next tier</dt>
+              <dd id="calcMissing">150</dd>
             </div>
             <div>
               <dt>Required spending for next tier</dt>
