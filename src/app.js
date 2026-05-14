@@ -270,10 +270,10 @@ function render() {
           <td><span class="badge ${statusClass}">${escapeHtml(entry.approved || "Unknown")}</span></td>
           <td class="numeric">${entry.points}</td>
           <td><span class="badge ${countClass}">${entry.countsTowardTier ? "Yes" : "No"}</span></td>
-          <td class="numeric">${formatMonths(entry.expiresInMonths, "Expired")}</td>
-          <td>${formatDate(entry.expiryDate)}</td>
           <td class="numeric">${formatMonths(entry.dropsOutInMonths, "Already dropped out")}</td>
           <td>${entry.dropsOutInMonths === null ? "Already dropped out" : formatDate(entry.dropoutDate)}</td>
+          <td class="numeric">${formatMonths(entry.expiresInMonths, "Expired")}</td>
+          <td>${formatDate(entry.expiryDate)}</td>
         </tr>
       `;
     }).join("");

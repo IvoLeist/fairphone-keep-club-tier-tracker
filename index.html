@@ -44,8 +44,8 @@
         <label for="fileInput" class="upload-target">
           <span class="upload-text">
             <span class="upload-title">Drop in your Keep Club CSV/TSV</span>
-            <span class="upload-copy">Expected columns: Date, Challenge, Points, Approved</span>
-            <span id="privacyNote" class="status-text"><svg class="info-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="none" fill="currentColor" opacity="0.08"></circle><path d="M8 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5zM7.25 6.5h1.5v5.25h-1.5V6.5z" fill="currentColor"/></svg>No data leaves your browser. All processing happens locally.</span>
+            <span class="upload-info">Expected columns: Date, Challenge, Points, Approved</span>
+            <span id="privacyNote" class="upload-info"><svg class="info-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="none" fill="currentColor" opacity="0.08"></circle><path d="M8 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5zM7.25 6.5h1.5v5.25h-1.5V6.5z" fill="currentColor"/></svg>No data leaves your browser. All processing happens locally.</span>
           </span>
           <span class="upload-file">
             <span class="upload-cta">Choose file</span>
@@ -74,7 +74,7 @@
           <strong id="summaryWindowPoints">0</strong>
         </article>
         <article class="metric">
-          <span>Unexpired points</span>
+          <span>Total (unexpired) points</span>
           <strong id="summaryUnexpiredPoints">0</strong>
         </article>
         <article class="metric">
@@ -104,10 +104,10 @@
                 <th>Status</th>
                 <th class="numeric">Points</th>
                 <th>Counts toward tier</th>
+                <th class="numeric">Drop out of 12-month window (in months)</th>
+                <th>Dropout date</th>
                 <th class="numeric">Expires in months</th>
                 <th>Expiry date</th>
-                <th class="numeric">Drops out in months</th>
-                <th>Dropout date</th>
               </tr>
             </thead>
             <tbody id="trackingBody">
