@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Keep Club Tier Tracker</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">Fairphone Keep Club</p>
+          <h1>Tier and point expiry tracker</h1>
+          <p class="lede">
+            Upload a Keep Club export with Date, Challenge, Points, and Approved columns.
+            The table calculates rolling 12-month tier points, 3-year point expiry, and the
+            exact date each entry leaves the tier window.
+          </p>
+        </div>
+        <div class="upload-panel">
+          <label for="fileInput" class="upload-target">
+            <span class="upload-title">Upload CSV or TSV</span>
+            <span class="upload-copy">Drop in your Keep Club export or choose a file</span>
+            <input id="fileInput" type="file" accept=".csv,.tsv,text/csv,text/tab-separated-values">
+          </label>
+          <div class="upload-actions">
+            <button id="sampleButton" type="button">Example</button>
+            <button id="clearButton" type="button" class="secondary">Clear</button>
+          </div>
+          <p id="fileStatus" class="status-text">No export loaded.</p>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="Summary">
+        <article class="metric">
+          <span>Current tier</span>
+          <strong id="summaryTier">Copper</strong>
+        </article>
+        <article class="metric">
+          <span>Points counting towards the current tier</span>
+          <strong id="summaryWindowPoints">0</strong>
+        </article>
+        <article class="metric">
+          <span>Unexpired points</span>
+          <strong id="summaryUnexpiredPoints">0</strong>
+        </article>
+        <article class="metric">
+          <span>Next dropout</span>
+          <strong id="summaryNextDropout">-</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="table-toolbar">
+          <div>
+            <h2>Tracking table</h2>
+            <p id="tableCaption">Load an export to calculate each point entry.</p>
+          </div>
+          <label class="filter-toggle">
+            <input id="approvedOnly" type="checkbox" checked>
+            Approved only
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Challenge</th>
+                <th>Status</th>
+                <th class="numeric">Points</th>
+                <th>Counts toward tier</th>
+                <th class="numeric">Expires in months</th>
+                <th>Expiry date</th>
+                <th class="numeric">Drops out in months</th>
+                <th>Dropout date</th>
+              </tr>
+            </thead>
+            <tbody id="trackingBody">
+              <tr>
+                <td colspan="9" class="empty-state">No rows loaded yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="calculator">
+        <div>
+          <h2>Tier calculator</h2>
+          <p>
+            Enter the points currently inside your 12-month tier window. The calculator uses
+            the workbook thresholds: Copper from 0, Silver from 150, Gold from 500.
+          </p>
+        </div>
+        <div class="calculator-card">
+          <label for="manualPoints">Current points in 12-month window</label>
+          <div class="input-row">
+            <input id="manualPoints" type="text" inputmode="numeric" pattern="[0-9]*" value="0">
+            <button id="useCalculatedButton" type="button">Use calculated</button>
+          </div>
+          <dl class="calc-results">
+            <div>
+              <dt>Current tier</dt>
+              <dd id="calcTier">Copper</dd>
+            </div>
+            <div>
+              <dt>Missing points till next tier</dt>
+              <dd id="calcMissing">150</dd>
+            </div>
+            <div>
+              <dt>Points per 1 €</dt>
+              <dd id="calcRate">1</dd>
+            </div>
+            <div>
+              <dt>Required spending for next tier</dt>
+              <dd id="calcSpending">€150.00</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
