@@ -1,7 +1,7 @@
 PORT ?= 8000
 URL := localhost:$(PORT)
 
-.PHONY: help serve open deploy
+.PHONY: help serve open deploy stop
 
 help:
 	@printf "Targets:\n"
@@ -12,6 +12,14 @@ help:
 
 serve:
 	python3 -m http.server $(PORT)
+
+stop:
+	@if pids=$$(lsof -t -iTCP:$(PORT) -sTCP:LISTEN 2>/dev/null) ; then \
+		echo "Stopping server on port $(PORT): $$pids" ; \
+		kill $$pids || true ; \
+	else \
+		echo "No server listening on port $(PORT)" ; \
+	fi
 
 open:
 	open $(URL)
