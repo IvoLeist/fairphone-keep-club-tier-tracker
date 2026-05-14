@@ -8,6 +8,7 @@
   --panel-raised: #ffffff;
   --accent: #276749;
   --accent-2: #0f766e;
+  --accent-orange: #d97706;
   --warn: #ad5c00;
   --bad: #9f1239;
   --good-bg: #e8f5ed;
@@ -36,6 +37,7 @@
   --panel-raised: #151f19;
   --accent: #76c090;
   --accent-2: #7dd3c7;
+  --accent-orange: #f59e0b;
   --warn: #f4b04f;
   --bad: #f38aa2;
   --good-bg: #183225;
@@ -479,7 +481,7 @@ h2 {
 }
 
 .metric-btn.active strong {
-  color: var(--accent);
+  color: var(--accent-orange);
 }
 
 .metric-tier {
@@ -545,7 +547,7 @@ h2 {
 }
 
 #trackingBody tr.marked {
-  background: color-mix(in srgb, var(--accent), var(--panel) 88%);
+  background: color-mix(in srgb, var(--accent-orange), var(--panel) 88%);
 }
 
 #trackingBody tr.marked td {
