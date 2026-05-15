@@ -426,6 +426,7 @@ function markRowsByDate(dateValues) {
 document.querySelectorAll(".metric-btn").forEach((button) => {
   button.addEventListener("click", () => {
     const isActive = button.classList.toggle("active");
+    button.setAttribute("aria-pressed", String(isActive));
     const dateValues = [...button.querySelectorAll("strong")]
       .map((dateElement) => dateElement.textContent.trim());
     
@@ -433,6 +434,7 @@ document.querySelectorAll(".metric-btn").forEach((button) => {
     document.querySelectorAll(".metric-btn.active").forEach((otherButton) => {
       if (otherButton !== button) {
         otherButton.classList.remove("active");
+        otherButton.setAttribute("aria-pressed", "false");
       }
     });
     
