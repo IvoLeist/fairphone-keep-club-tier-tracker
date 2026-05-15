@@ -57,7 +57,10 @@
           <button id="sampleButton" type="button">Example</button>
           <button id="clearButton" type="button" class="secondary">Clear</button>
         </div>
-        <p id="fileStatus" class="status-text">No export loaded.</p>
+        <p id="fileStatus" class="status-text">
+          <span id="fileStatusText">No export loaded.</span>
+          <button id="downloadExampleButton" type="button" class="secondary status-button" hidden>Download example input</button>
+        </p>
       </section>
 
       <section id="summary" class="summary-grid" aria-label="Summary">

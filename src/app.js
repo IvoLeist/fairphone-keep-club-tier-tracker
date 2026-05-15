@@ -15,11 +15,13 @@ const els = {
   fileInput: document.querySelector("#fileInput"),
   fileName: document.querySelector("#fileName"),
   sampleButton: document.querySelector("#sampleButton"),
+  downloadExampleButton: document.querySelector("#downloadExampleButton"),
   clearButton: document.querySelector("#clearButton"),
   themeToggle: document.querySelector("#themeToggle"),
   themeToggleIcon: document.querySelector("#themeToggle .theme-icon"),
   themeToggleLabel: document.querySelector("#themeToggle .theme-label"),
   fileStatus: document.querySelector("#fileStatus"),
+  fileStatusText: document.querySelector("#fileStatusText"),
   countTowardsTierOnly: document.querySelector("#countTowardsTierOnly"),
   trackingBody: document.querySelector("#trackingBody"),
   tableCaption: document.querySelector("#tableCaption"),
@@ -41,6 +43,7 @@ const els = {
 };
 
 let exampleRowsPromise = null;
+let exampleTextPromise = null;
 
 function parseDelimited(text) {
   const delimiter = text.includes("\t") && text.split("\t").length > text.split(",").length ? "\t" : ",";
@@ -318,25 +321,33 @@ function escapeHtml(value) {
 
 function loadRows(rows, label) {
   entries = rowsToEntries(rows);
-  els.fileStatus.textContent = `${label}: ${entries.length} valid rows loaded.`;
+  els.fileStatusText.textContent = `${label}: ${entries.length} valid rows loaded.`;
   els.fileName.textContent = label;
   els.uploadPanel.dataset.state = "loaded";
+  els.downloadExampleButton.hidden = label !== "Example TSV";
   render();
 }
 
 async function loadExampleRows() {
   if (!exampleRowsPromise) {
-    exampleRowsPromise = fetch("data/example.tsv")
+    exampleRowsPromise = loadExampleText().then((text) => parseDelimited(text));
+  }
+
+  return exampleRowsPromise;
+}
+
+async function loadExampleText() {
+  if (!exampleTextPromise) {
+    exampleTextPromise = fetch("data/example.tsv")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Unable to load example TSV: ${response.status}`);
         }
         return response.text();
-      })
-      .then((text) => parseDelimited(text));
+      });
   }
 
-  return exampleRowsPromise;
+  return exampleTextPromise;
 }
 
 els.fileInput.addEventListener("change", async (event) => {
@@ -348,9 +359,10 @@ els.fileInput.addEventListener("change", async (event) => {
     loadRows(parseDelimited(text), file.name);
   } catch (error) {
     entries = [];
-    els.fileStatus.textContent = error.message;
+    els.fileStatusText.textContent = error.message;
     els.fileName.textContent = file.name;
     els.uploadPanel.dataset.state = "error";
+    els.downloadExampleButton.hidden = true;
     render();
   }
 });
@@ -360,10 +372,32 @@ els.sampleButton.addEventListener("click", () => {
     .then((rows) => loadRows(rows, "Example TSV"))
     .catch((error) => {
       entries = [];
-      els.fileStatus.textContent = error.message;
+      els.fileStatusText.textContent = error.message;
       els.fileName.textContent = "Example TSV";
       els.uploadPanel.dataset.state = "error";
+      els.downloadExampleButton.hidden = true;
       render();
+    });
+});
+
+els.downloadExampleButton.addEventListener("click", () => {
+  loadExampleText()
+    .then((text) => {
+      const blob = new Blob([text], { type: "text/tab-separated-values;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "example.tsv";
+      link.rel = "noopener";
+      document.body.append(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    })
+    .catch((error) => {
+      els.fileStatusText.textContent = error.message;
+      els.uploadPanel.dataset.state = "error";
+      els.downloadExampleButton.hidden = true;
     });
 });
 
@@ -372,7 +406,8 @@ els.clearButton.addEventListener("click", () => {
   els.fileInput.value = "";
   els.fileName.textContent = "No file selected";
   els.uploadPanel.dataset.state = "empty";
-  els.fileStatus.textContent = "No export loaded.";
+  els.fileStatusText.textContent = "No export loaded.";
+  els.downloadExampleButton.hidden = true;
   render();
 });
 

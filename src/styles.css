@@ -353,6 +353,23 @@ h2 {
   min-width: 128px;
 }
 
+.upload-actions button.secondary {
+  text-decoration: none;
+}
+
+.status-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-button {
+  min-width: 0;
+  min-height: 32px;
+  padding-inline: 12px;
+}
+
 .upload-actions {
   align-self: center;
   justify-content: flex-end;
