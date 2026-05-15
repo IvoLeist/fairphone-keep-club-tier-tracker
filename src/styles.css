@@ -407,7 +407,7 @@ h2 {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: 1.35fr repeat(4, minmax(0, 1fr));
+  grid-template-columns: 1.35fr repeat(2, minmax(0, 1fr)) minmax(300px, 2fr);
   gap: 12px;
   margin: 0 0 18px;
 }
@@ -482,6 +482,36 @@ h2 {
 
 .metric-btn.active strong {
   color: var(--accent-orange);
+}
+
+.metric-dates {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  align-content: stretch;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+}
+
+.metric .metric-date-item {
+  display: grid;
+  align-content: space-between;
+  align-self: stretch;
+  min-height: 114px;
+  margin: 0;
+  padding: 16px;
+  color: inherit;
+  font-size: inherit;
+}
+
+.metric-date-item + .metric-date-item {
+  border-left: 1px solid var(--line);
+}
+
+.metric-dates:hover .metric-date-item + .metric-date-item,
+.metric-dates.active .metric-date-item + .metric-date-item {
+  border-left-color: color-mix(in srgb, var(--accent), var(--line) 55%);
 }
 
 .metric-tier {
@@ -881,7 +911,8 @@ tbody tr:last-child td {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .metric-tier {
+  .metric-tier,
+  .metric-dates {
     grid-column: 1 / -1;
   }
 
@@ -968,6 +999,21 @@ tbody tr:last-child td {
 
   .summary-grid {
     grid-template-columns: 1fr;
+  }
+
+  .metric-dates {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-date-item + .metric-date-item {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .metric-dates:hover .metric-date-item + .metric-date-item,
+  .metric-dates.active .metric-date-item + .metric-date-item {
+    border-top-color: color-mix(in srgb, var(--accent), var(--line) 55%);
+    border-left-color: transparent;
   }
 
   .table-toolbar,
