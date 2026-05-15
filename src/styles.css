@@ -402,13 +402,24 @@ h2 {
 }
 
 .info-icon {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
   vertical-align: -2px;
   margin-right: 8px;
   fill: currentColor;
   color: var(--accent-2);
+}
+
+#privacyNote {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+#points-info {
+  flex-wrap: nowrap;
 }
 
 #points-info .info-icon {
