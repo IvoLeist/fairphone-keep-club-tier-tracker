@@ -512,7 +512,7 @@ h2 {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 8px;
   margin: 0;
   padding: 10px 14px;
@@ -520,35 +520,17 @@ h2 {
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 800 !important;
-  text-align: right !important;
+  text-align: center !important;
   white-space: nowrap;
 }
 
-.metric-dates .metric-action::before {
-  content: "";
-  width: 14px;
-  height: 8px;
-  flex: 0 0 auto;
-  border: 2px solid currentColor;
-  border-top: 0;
-  border-right: 0;
-  transform: rotate(-10deg);
-}
-
-.metric-dates .metric-action::after {
-  content: ">";
-  flex: 0 0 auto;
-  color: var(--muted);
-  font-weight: 900;
-}
-
 .metric-dates .metric-action-text {
-  display: inline;
-  margin: 0;
+  display: inline-block;
+  margin: 0 auto;
   color: inherit;
   font-size: inherit;
   font-weight: 800 !important;
-  text-align: inherit;
+  text-align: center;
 }
 
 .metric-dates:hover .metric-date-item + .metric-date-item,
