@@ -400,11 +400,16 @@ function clearRowHighlights() {
   });
 }
 
-function markRowsByDate(dateString) {
-  if (!dateString || dateString === "-") {
+function markRowsByDate(dateValues) {
+  const dates = new Set((Array.isArray(dateValues) ? dateValues : [dateValues])
+    .map((value) => String(value || "").trim())
+    .filter((value) => value && value !== "-"));
+
+  if (!dates.size) {
     clearRowHighlights();
     return;
   }
+
   clearRowHighlights();
   const rows = document.querySelectorAll("#trackingBody tr");
   rows.forEach((row) => {
@@ -412,7 +417,7 @@ function markRowsByDate(dateString) {
     const entryDate = cells[0]?.textContent.trim();
     const dropoutDate = cells[6]?.textContent.trim();
     const expiryDate = cells[8]?.textContent.trim();
-    if (entryDate === dateString || dropoutDate === dateString || expiryDate === dateString) {
+    if (dates.has(entryDate) || dates.has(dropoutDate) || dates.has(expiryDate)) {
       row.classList.add("marked");
     }
   });
@@ -421,8 +426,8 @@ function markRowsByDate(dateString) {
 document.querySelectorAll(".metric-btn").forEach((button) => {
   button.addEventListener("click", () => {
     const isActive = button.classList.toggle("active");
-    const dateElement = button.querySelector("strong");
-    const dateValue = dateElement ? dateElement.textContent.trim() : "";
+    const dateValues = [...button.querySelectorAll("strong")]
+      .map((dateElement) => dateElement.textContent.trim());
     
     // Deactivate all other metric-btn buttons
     document.querySelectorAll(".metric-btn.active").forEach((otherButton) => {
@@ -432,7 +437,7 @@ document.querySelectorAll(".metric-btn").forEach((button) => {
     });
     
     if (isActive) {
-      markRowsByDate(dateValue);
+      markRowsByDate(dateValues);
     } else {
       clearRowHighlights();
     }
