@@ -412,12 +412,21 @@ h2 {
 }
 
 .metric {
-  padding: 16px;
-  min-height: 116px;
   display: grid;
   align-content: space-between;
+  padding: 16px;
+  min-height: 116px;
   box-shadow: 0 10px 30px rgb(25 33 29 / 5%);
 }
+
+.summary-grid > .metric:not(.metric-tier):not(.metric-dates) {
+  align-content: start;
+}
+
+.summary-grid > .metric:not(.metric-tier):not(.metric-dates) > span {
+  min-height: 45px;
+}
+
 
 .metric-btn {
   padding: 16px;
@@ -463,6 +472,7 @@ h2 {
   color: var(--muted);
   font-size: 0.82rem;
   margin-bottom: 8px;
+  text-align: left;
 }
 
 .metric strong {
@@ -505,7 +515,7 @@ h2 {
 }
 
 .metric-date-item + .metric-date-item {
-  border-left: 1px solid var(--line);
+  border-left: none;
 }
 
 .metric-dates .metric-action {
@@ -516,7 +526,7 @@ h2 {
   gap: 8px;
   margin: 0;
   padding: 10px 14px;
-  border-top: 1px solid var(--line);
+  border-top: none;
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 800 !important;
