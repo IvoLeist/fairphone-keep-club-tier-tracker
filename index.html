@@ -77,7 +77,7 @@
           <span>Total (unexpired) points</span>
           <strong id="summaryUnexpiredPoints">0</strong>
         </article>
-        <button class="metric metric-btn metric-dates" type="button">
+        <button class="metric metric-btn metric-dates" type="button" aria-label="Highlight rows with points that drop out of the 12-month window or expire on these dates" aria-pressed="false" title="Marks rows with points that drop out of the 12-month window or expire.">
           <span class="metric-date-item">
             <span>Next dropout of the 12-month window</span>
             <strong id="summaryNextDropout">-</strong>
@@ -85,6 +85,9 @@
           <span class="metric-date-item">
             <span>Next expiration</span>
             <strong id="summaryNextExpiration">-</strong>
+          </span>
+          <span class="metric-action" aria-hidden="true">
+            <span class="metric-action-text">Highlight affected rows</span>
           </span>
         </button>
       </section>

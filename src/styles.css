@@ -508,9 +508,58 @@ h2 {
   border-left: 1px solid var(--line);
 }
 
+.metric-dates .metric-action {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800 !important;
+  text-align: right !important;
+  white-space: nowrap;
+}
+
+.metric-dates .metric-action::before {
+  content: "";
+  width: 14px;
+  height: 8px;
+  flex: 0 0 auto;
+  border: 2px solid currentColor;
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(-10deg);
+}
+
+.metric-dates .metric-action::after {
+  content: ">";
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.metric-dates .metric-action-text {
+  display: inline;
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 800 !important;
+  text-align: inherit;
+}
+
 .metric-dates:hover .metric-date-item + .metric-date-item,
 .metric-dates.active .metric-date-item + .metric-date-item {
   border-left-color: color-mix(in srgb, var(--accent), var(--line) 55%);
+}
+
+.metric-dates:hover .metric-action,
+.metric-dates.active .metric-action {
+  border-top-color: color-mix(in srgb, var(--accent), var(--line) 55%);
+  color: var(--accent-orange);
 }
 
 .metric-tier {
@@ -1013,6 +1062,11 @@ tbody tr:last-child td {
   .metric-dates.active .metric-date-item + .metric-date-item {
     border-top-color: color-mix(in srgb, var(--accent), var(--line) 55%);
     border-left-color: transparent;
+  }
+
+  .metric-dates .metric-action {
+    justify-content: flex-start;
+    text-align: left !important;
   }
 
   .table-toolbar,
