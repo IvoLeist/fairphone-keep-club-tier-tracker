@@ -401,10 +401,6 @@ h2 {
   font-size: 0.92rem;
 }
 
-.nowrap {
-  white-space: nowrap;
-}
-
 .info-icon {
   width: 14px;
   height: 14px;
@@ -1100,4 +1096,9 @@ tbody tr:last-child td {
     align-items: flex-start;
     flex-direction: column;
   }
+}
+
+.agb-link {
+  margin: 0;
+  letter-spacing: normal;
 }
